@@ -38,10 +38,10 @@ Page which makes it available for all Page types:
 
 Changing $gallerist_active to false in a subclass would disable Gallerist for
 that subclass (and its subclasses). Activation and deactivation can also be done
-using Object::set_static(...) which is nice when dealing with a third party
+using Object::add_static_var(...) which is nice when dealing with a third party
 module:
 
-    Object::set_static('UserDefinedForm', 'gallerist_active', true);
+    Object::add_static_var('UserDefinedForm', 'gallerist_active', true, true);
 
 ### Modifying your theme
 
