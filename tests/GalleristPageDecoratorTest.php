@@ -32,7 +32,7 @@
 
 /**
  */
-class GalleristPageDecoratorTest extends SapphireTest {
+class GalleristPageDecoratorTest extends FunctionalTest {
 	
 	public static $fixture_file = 'gallerist/tests/GalleristPageDecoratorTest.yml';
 	
@@ -42,9 +42,9 @@ class GalleristPageDecoratorTest extends SapphireTest {
 	public function setUp() {
 		parent::setUp();
 		$this->oldMarkupTemplate = Object::get_static('GalleristPageDecorator', 'markup_template');
-		Object::set_static('GalleristPageDecorator', 'markup_template', 'Gallerist');
+		Object::add_static_var('GalleristPageDecorator', 'markup_template', 'Gallerist', true);
 		$this->oldGalleristActive = Object::get_static('Page', 'gallerist_active');
-		Object::set_static('Page', 'gallerist_active', true);
+		Object::add_static_var('Page', 'gallerist_active', true, true);
 		foreach($this->allFixtureIDs('Image') as $fileID) {
 			$file = DataObject::get_by_id('Image', $fileID);
 			copy(BASE_PATH . "/gallerist/images/{$file->Name}", BASE_PATH . "/{$file->Filename}");
@@ -52,8 +52,8 @@ class GalleristPageDecoratorTest extends SapphireTest {
 	}
 	
 	public function tearDown() {
-		Object::set_static('GalleristPageDecorator', 'markup_template', $this->oldMarkupTemplate);
-		Object::set_static('Page', 'gallerist_active', $this->oldGalleristActive);
+		Object::add_static_var('GalleristPageDecorator', 'markup_template', $this->oldMarkupTemplate, true);
+		Object::add_static_var('Page', 'gallerist_active', $this->oldGalleristActive, true);
 		foreach($this->allFixtureIDs('Image') as $fileID) {
 			$file = DataObject::get_by_id('Image', $fileID);
 			$file->delete();
@@ -88,6 +88,16 @@ class GalleristPageDecoratorTest extends SapphireTest {
 		$cssParser = new CSSContentParser($markup);
 		$this->assertTrue((bool)$cssParser->getBySelector('#Gallerist'));
 		$this->assertEquals(3, count($cssParser->getBySelector('#Gallerist .GalleristPageItem')));
+	}
+	
+	public function testCMSFields() {
+		$this->loginAs(1);
+		$page = DataObject::get_one('Page', "\"URLSegment\" = 'page1'");
+		$this->assertType('Page', $page);
+		$response = $this->get("/admin/show/{$page->ID}");
+		$this->assertEquals(200, $response->getStatusCode());
+		$this->assertTrue((bool)$this->cssParser()->getBySelector('#Form_EditForm_GalleristPageItems'));
+		$this->assertEquals(3, count($this->cssParser()->getBySelector('#Form_EditForm_GalleristPageItems td.Image.Filename')));
 	}
 	
 }

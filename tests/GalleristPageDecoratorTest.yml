@@ -16,15 +16,15 @@ Image:
 
 GalleristPageItem:
 	item1:
-		File: =>Image.image3
+		Image: =>Image.image3
 		Page: =>Page.page1
 		Sort: 1
 	item2:
-		File: =>Image.image2
+		Image: =>Image.image2
 		Page: =>Page.page1
 		Sort: 2
 	item3:
-		File: =>Image.image1
+		Image: =>Image.image1
 		Page: =>Page.page1
 		Sort: 3
 

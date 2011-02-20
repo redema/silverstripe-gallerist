@@ -77,7 +77,7 @@ class GalleristPageDecorator extends DataObjectDecorator {
 				'GalleristPageItem',
 				array(
 					'Thumbnail' => singleton('GalleristPageItem')->fieldLabel('Thumbnail'),
-					'File.Filename' => singleton('File')->fieldLabel('Filename'),
+					'Image.Filename' => singleton('Image')->fieldLabel('Filename'),
 					'Title' => singleton('GalleristPageItem')->fieldLabel('Title'),
 					'Description' => singleton('GalleristPageItem')->fieldLabel('Description'),
 					'PublishedToLive' => singleton('GalleristPageItem')->fieldLabel('PublishedToLive')
@@ -133,7 +133,7 @@ class GalleristPageDecorator extends DataObjectDecorator {
 		$galleryItems = $this->owner->GalleristPageItems();
 		if ($galleryItems) foreach ($galleryItems as $item) {
 			$image = $item->Image();
-			if ($image && ($height == 0 || $image->getHeight() < $height)) {
+			if ($image->exists() && ($height == 0 || $image->getHeight() < $height)) {
 				$height = $image->getHeight();
 			}
 		}

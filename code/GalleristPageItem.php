@@ -43,7 +43,7 @@ class GalleristPageItem extends DataObject {
 	);
 	
 	public static $has_one = array(
-		'File' => 'File',
+		'Image' => 'Image',
 		'Page' => 'Page'
 	);
 	
@@ -74,7 +74,7 @@ class GalleristPageItem extends DataObject {
 		$labels['PublishedToLive'] = _t('GalleristPageItem.PUBLISHEDTOLIVE', 'Published?');
 		
 		if ($includerelations) {
-			$labels['File'] = _t('GalleristPageItem.FILE', 'File');
+			$labels['Image'] = _t('GalleristPageItem.IMAGE', 'Image');
 			$labels['Page'] = _t('GalleristPageItem.PAGE', 'Page');
 		}
 		
@@ -104,19 +104,17 @@ class GalleristPageItem extends DataObject {
 	}
 	
 	public function Image() {
-		$file = $this->File();
-		if ($file->ID && is_a($file, 'Image')) {
-			if ($this->PageID && ($width = $this->Page()->GalleristImageWidth())) {
-				$file = $file->SetWidth($width);
-			}
-			return $file;
+		$image = $this->getComponent('Image');
+		if ($image->exists()) {
+			if ($this->PageID && ($width = $this->Page()->GalleristImageWidth()))
+				$image = $image->SetWidth($width);
 		}
-		return null;
+		return $image;
 	}
 	
 	public function Thumbnail() {
 		$image = $this->Image();
-		if ($image) {
+		if ($image->exists()) {
 			return $image->CroppedImage(25, 25);
 		}
 		return null;
