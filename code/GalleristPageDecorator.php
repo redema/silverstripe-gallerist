@@ -71,7 +71,9 @@ class GalleristPageDecorator extends DataObjectDecorator {
 	
 	public function updateCMSFields(FieldSet &$fields) {
 		if (Object::get_static($this->owner->class, 'gallerist_active')) {
-			$complexTableField = new ComplexTableField(
+			$complexTableFieldClass = class_exists('OrderableComplexTableField')?
+				'OrderableComplexTableField': 'ComplexTableField';
+			$complexTableField = new $complexTableFieldClass(
 				$this->owner,
 				'GalleristPageItems',
 				'GalleristPageItem',

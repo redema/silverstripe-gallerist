@@ -33,6 +33,7 @@
 $modules = array(
 	'Janitor' => 'janitor',
 	'Handyman' => 'handyman',
+	'Orderable' => 'orderable'
 );
 
 foreach ($modules as $class => $module) {
@@ -47,4 +48,8 @@ unset($modules);
 Object::add_extension('Page', 'GalleristPageDecorator');
 Object::add_extension('Page_Controller', 'GalleristPageControllerExtension');
 Object::add_extension('File', 'GalleristFileDecorator');
+
+if (class_exists('Orderable')) {
+	Object::add_extension('GalleristPageItem', 'Orderable');
+}
 

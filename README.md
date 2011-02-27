@@ -11,9 +11,12 @@ Author: Erik Edlund <erik@charden.se>
 ## Requirements
 
  * PHP: 5.2.4+ minimum.
- * SilverStripe: 2.4.4 minimum (previous versions has never been tested).
+ * SilverStripe: 2.4.5 minimum.
+ * Modules: janitor, handyman, orderable.
 
 ## Installation Instructions
+
+ * Install the required modules.
 
  * Place this directory in the root of your SilverStripe installation. Make sure
    that the folder is named "gallerist" if you are planning to run the unit tests.
