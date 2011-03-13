@@ -102,3 +102,18 @@ class GalleristPageDecoratorTest extends FunctionalTest {
 	
 }
 
+class GalleristPageDecoratorTest_SpecialPage extends Page {
+	
+	/**
+	 * Override any project specific implementation of the
+	 * GalleristImageWidth()-method to allow the unit tests to
+	 * pass.
+	 * 
+	 * @see GalleristPageItem
+	 */
+	public function GalleristImageWidth() {
+		return 0;
+	}
+	
+}
+

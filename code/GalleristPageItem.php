@@ -106,8 +106,11 @@ class GalleristPageItem extends DataObject {
 	public function Image() {
 		$image = $this->getComponent('Image');
 		if ($image->exists()) {
-			if ($this->PageID && ($width = $this->Page()->GalleristImageWidth()))
+			if ($this->PageID && ($width = $this->Page()->GalleristImageWidth())) {
 				$image = $image->SetWidth($width);
+				// Set a dummy ImageID in order to allow further manipulation.
+				$image->ID = -1;
+			}
 		}
 		return $image;
 	}
