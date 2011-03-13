@@ -63,13 +63,13 @@ class GalleristPageDecoratorTest extends FunctionalTest {
 	
 	public function testHeightCalculation() {
 		$page = DataObject::get_one('Page', "\"URLSegment\" = 'page1'");
-		$this->assertType('Page', $page);
+		$this->assertInstanceOf('Page', $page);
 		$this->assertEquals(600, $page->GalleristImageHeight());
 	}
 	
 	public function testGalleristImage() {
 		$page = DataObject::get_one('Page', "\"URLSegment\" = 'page1'");
-		$this->assertType('Page', $page);
+		$this->assertInstanceOf('Page', $page);
 		$expectedImages = array(
 			0 => 'assets/Test-800x800.png',
 			1 => 'assets/Test-800x700.png',
@@ -82,7 +82,7 @@ class GalleristPageDecoratorTest extends FunctionalTest {
 	
 	public function testMarkupTemplate() {
 		$page = DataObject::get_one('Page', "\"URLSegment\" = 'page1'");
-		$this->assertType('Page', $page);
+		$this->assertInstanceOf('Page', $page);
 		$markup = $page->Gallerist();
 		$this->assertTrue((bool)$markup);
 		$cssParser = new CSSContentParser($markup);
@@ -93,7 +93,7 @@ class GalleristPageDecoratorTest extends FunctionalTest {
 	public function testCMSFields() {
 		$this->loginAs(1);
 		$page = DataObject::get_one('Page', "\"URLSegment\" = 'page1'");
-		$this->assertType('Page', $page);
+		$this->assertInstanceOf('Page', $page);
 		$response = $this->get("/admin/show/{$page->ID}");
 		$this->assertEquals(200, $response->getStatusCode());
 		$this->assertTrue((bool)$this->cssParser()->getBySelector('#Form_EditForm_GalleristPageItems'));
