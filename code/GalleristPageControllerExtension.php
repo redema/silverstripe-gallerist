@@ -37,7 +37,7 @@ class GalleristPageControllerExtension extends Extension {
 	
 	public function onAfterInit() {
 		$cssTemplate = Object::get_static('GalleristPageDecorator', 'css_template');
-		if ((bool)$cssTemplate) {
+		if ((bool)$cssTemplate && $this->owner->hasMethod('data')) {
 			Requirements::customCSS($this->owner->data()->renderWith($cssTemplate));
 		}
 		Requirements::themedCSS('gallerist');
