@@ -103,9 +103,9 @@ class GalleristPageItem extends DataObject {
 		return _t('GalleristPageItem.PUBLISHEDTOLIVENO', 'No');
 	}
 	
-	public function Image() {
+	public function Image($resize = true) {
 		$image = $this->getComponent('Image');
-		if ($image->exists()) {
+		if ($resize && $image->exists()) {
 			if ($this->PageID && ($width = $this->Page()->GalleristImageWidth())) {
 				$image = $image->SetWidth($width);
 				// Set a dummy ImageID in order to allow further manipulation.
@@ -116,7 +116,7 @@ class GalleristPageItem extends DataObject {
 	}
 	
 	public function Thumbnail() {
-		$image = $this->Image();
+		$image = $this->Image(false);
 		if ($image->exists()) {
 			return $image->CroppedImage(25, 25);
 		}
