@@ -94,6 +94,5 @@ like all themed CSS-files it can be overridden on a theme basis.
 #### JavaScript
 
 Gallerist will not include any JavaScript automatically in order to avoid
-conflicts. It is however shipped with jQuery/jQuery.cycle which makes it easy
-to include and write the required JavaScript.
+conflicts.
 
