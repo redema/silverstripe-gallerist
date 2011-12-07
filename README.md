@@ -12,7 +12,7 @@ Author: Erik Edlund <erik@charden.se>
 
  * PHP: 5.2.4+ minimum.
  * SilverStripe: 2.4.5 minimum.
- * Modules: janitor, handyman, orderable.
+ * Modules: handyman, orderable.
 
 ## Installation Instructions
 

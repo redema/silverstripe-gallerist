@@ -31,7 +31,6 @@
  */
 
 $modules = array(
-	'Janitor' => 'janitor',
 	'Handyman' => 'handyman',
 	'Orderable' => 'orderable'
 );
